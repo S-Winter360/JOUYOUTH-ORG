@@ -1,0 +1,73 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net
+    match /{document=**} { 
+      allow read, write: if false; 
+    }
+
+    // Primitive Helpers
+    function isValidId(id) { 
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+
+    // Validation Blueprints
+    function isValidVolunteer(data) {
+      return data.keys().hasAll(['fullName', 'email', 'phoneNumber', 'role', 'skills', 'availability', 'motivation', 'createdAt'])
+        && data.keys().size() == 8
+        && data.fullName is string && data.fullName.size() > 0 && data.fullName.size() <= 100
+        && data.email is string && data.email.size() > 0 && data.email.size() <= 150 && data.email.matches('^.+@.+\\..+$')
+        && data.phoneNumber is string && data.phoneNumber.size() > 0 && data.phoneNumber.size() <= 30
+        && data.role is string && data.role.size() > 0 && data.role.size() <= 50
+        && data.skills is string && data.skills.size() <= 1000
+        && data.availability is list && data.availability.size() <= 10
+        && (data.availability.size() == 0 || data.availability[0] is string)
+        && data.motivation is string && data.motivation.size() > 0 && data.motivation.size() <= 2000
+        && data.createdAt is number;
+    }
+
+    function isValidMessage(data) {
+      return data.keys().hasAll(['name', 'email', 'message', 'createdAt'])
+        && data.keys().size() == 4
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.email is string && data.email.size() > 0 && data.email.size() <= 150 && data.email.matches('^.+@.+\\..+$')
+        && data.message is string && data.message.size() > 0 && data.message.size() <= 2000
+        && data.createdAt is number;
+    }
+
+    function isValidAdmin(data) {
+      return data.keys().hasAll(['email'])
+        && data.keys().size() == 1
+        && data.email is string && data.email.size() <= 150;
+    }
+
+    // Collections
+    match /volunteers/{volunteerId} {
+      // Allow public creation (for anonymous users) given strict payload schema
+      allow create: if isValidId(volunteerId) && isValidVolunteer(incoming());
+      // Only Admins can read, update or list
+      allow get, list: if isAdmin();
+      allow update: if false; // Immutable
+      allow delete: if isAdmin();
+    }
+
+    match /messages/{messageId} {
+      allow create: if isValidId(messageId) && isValidMessage(incoming());
+      allow get, list: if isAdmin();
+      allow update: if false; // Immutable
+      allow delete: if isAdmin();
+    }
+
+    match /admins/{adminId} {
+      // Only an existing admin can create another admin
+      allow create: if isAdmin() && isValidId(adminId) && isValidAdmin(incoming());
+      allow get, list: if isAdmin() || (isSignedIn() && request.auth.uid == adminId);
+      allow update, delete: if isAdmin();
+    }
+  }
+}

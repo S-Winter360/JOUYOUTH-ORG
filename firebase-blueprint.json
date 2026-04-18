@@ -1,0 +1,58 @@
+{
+  "entities": {
+    "Volunteer": {
+      "title": "Volunteer",
+      "description": "A volunteer registration submission",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "role": { "type": "string" },
+        "skills": { "type": "string" },
+        "availability": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "motivation": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["fullName", "email", "phoneNumber", "role", "skills", "availability", "motivation", "createdAt"]
+    },
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "A message submitted via the contact form",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["name", "email", "message", "createdAt"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "An administrator allowed to access the dashboard",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" }
+      },
+      "required": ["email"]
+    }
+  },
+  "firestore": {
+    "/volunteers/{volunteerId}": {
+      "schema": { "$ref": "#/entities/Volunteer" },
+      "description": "Volunteer registrations"
+    },
+    "/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ContactMessage" },
+      "description": "Contact form submissions"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "System administrators"
+    }
+  }
+}
