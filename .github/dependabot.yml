@@ -1,0 +1,47 @@
+version: 2
+updates:
+  # NPM dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
+    open-pull-requests-limit: 10
+    pull-request-branch-name:
+      separator: "/"
+    rebase-strategy: "auto"
+    commit-message:
+      prefix: "chore(deps):"
+      include: "scope"
+    reviewers:
+      - "S-Winter360"
+    assignees:
+      - "S-Winter360"
+    labels:
+      - "dependencies"
+      - "npm"
+    allow:
+      - dependency-type: "all"
+    ignore:
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+    open-pull-requests-limit: 5
+    pull-request-branch-name:
+      separator: "/"
+    commit-message:
+      prefix: "ci(deps):"
+      include: "scope"
+    reviewers:
+      - "S-Winter360"
+    labels:
+      - "dependencies"
+      - "github-actions"
