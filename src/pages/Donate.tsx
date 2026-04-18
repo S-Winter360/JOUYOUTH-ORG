@@ -55,20 +55,6 @@ export default function Donate() {
               </div>
               <div className="text-xs text-[#818cf8] mt-2 font-medium tracking-wide">Name: Akanzagisi Norbert</div>
             </div>
-
-            <div className="bg-[rgba(255,255,255,0.02)] p-5 rounded-2xl border border-[rgba(255,255,255,0.05)]">
-              <div className="text-xs uppercase tracking-widest text-text-muted mb-1">Vodafone Cash</div>
-              <div className="flex justify-between items-center">
-                <span className="text-[20px] font-bold tracking-wider">0201 234 567</span>
-                <button 
-                  onClick={() => handleCopy("0201234567", "voda")}
-                  className="p-2 hover:bg-[rgba(255,255,255,0.05)] rounded-lg transition-colors border border-[rgba(255,255,255,0.05)]"
-                >
-                  {copied === "voda" ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-text-muted" />}
-                </button>
-              </div>
-              <div className="text-xs text-[#818cf8] mt-2 font-medium tracking-wide">Name: Joyouth Org</div>
-            </div>
           </div>
         </div>
 
@@ -82,18 +68,18 @@ export default function Donate() {
             <div className="bg-[rgba(255,255,255,0.02)] p-5 rounded-2xl border border-[rgba(255,255,255,0.05)]">
               <div className="grid grid-cols-3 gap-2 mb-3 items-center">
                 <span className="text-xs tracking-widest uppercase text-text-muted">Bank Name</span>
-                <span className="col-span-2 font-bold text-white tracking-wide">Ecobank Ghana</span>
+                <span className="col-span-2 font-bold text-white tracking-wide">GCB</span>
               </div>
               <div className="grid grid-cols-3 gap-2 mb-3 items-center">
                 <span className="text-xs tracking-widest uppercase text-text-muted">Account Name</span>
-                <span className="col-span-2 font-bold text-white tracking-wide">Joyouth Organization</span>
+                <span className="col-span-2 font-bold text-white tracking-wide">Akanzagisi Norbert (Norlin)</span>
               </div>
               <div className="grid grid-cols-3 gap-2 items-center">
                 <span className="text-xs tracking-widest uppercase text-text-muted shrink-0">Account No.</span>
                 <div className="col-span-2 flex justify-between items-center">
-                  <span className="font-bold tracking-wider text-white text-[16px]">1234567890123</span>
+                  <span className="font-bold tracking-wider text-white text-[16px]">9021010042015</span>
                   <button 
-                    onClick={() => handleCopy("1234567890123", "bank")}
+                    onClick={() => handleCopy("9021010042015", "bank")}
                     className="p-2 hover:bg-[rgba(255,255,255,0.05)] rounded-lg transition-colors border border-[rgba(255,255,255,0.05)]"
                   >
                     {copied === "bank" ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-text-muted" />}
