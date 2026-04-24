@@ -56,8 +56,8 @@ service cloud.firestore {
     match /volunteers/{volunteerId} {
       // Allow public creation (for anonymous users) given strict payload schema
       allow create: if isValidId(volunteerId) && isValidVolunteer(incoming());
-      // Only Admins can read, update or list
-      allow get, list: if isAdmin();
+      // Public read required to show on conference page
+      allow get, list: if true;
       allow update: if false; // Immutable
       allow delete: if isAdmin();
     }

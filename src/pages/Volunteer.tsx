@@ -172,6 +172,17 @@ export default function Volunteer() {
                       <div className="grid grid-cols-2 gap-3">
                         {availabilityOptions.map(option => (
                           <label key={option} className="flex items-center gap-3 cursor-pointer group p-3 rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.05)] transition-all">
+                            <input
+                              type="checkbox"
+                              className="hidden"
+                              checked={formData.availability.includes(option)}
+                              onChange={() => {
+                                const newOptions = formData.availability.includes(option)
+                                  ? formData.availability.filter(o => o !== option)
+                                  : [...formData.availability, option];
+                                setFormData({...formData, availability: newOptions});
+                              }}
+                            />
                             <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
                               formData.availability.includes(option) ? "bg-[#6366f1] border-[#6366f1]" : "border-gray-500"
                             }`}>
