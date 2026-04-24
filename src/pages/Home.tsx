@@ -77,8 +77,8 @@ export default function Home() {
 
               <div className="grid grid-cols-3 gap-5">
                 {[
-                  { label: "Youth Empowered", value: "1.2k+" },
-                  { label: "Projects Done", value: "48" },
+                  { label: "Youth Empowered", value: "150+" },
+                  { label: "Projects Done", value: "50+" },
                   { label: "Partners", value: "15" },
                 ].map((stat, i) => (
                   <div key={i} className="stat-card">
@@ -129,10 +129,10 @@ export default function Home() {
               
               <div className="grid grid-cols-2 gap-5 mt-12">
                 {[
-                  { icon: Users, label: "Youth Empowered", value: "5,000+", bg: "https://i.pinimg.com/736x/ab/62/de/ab62ded6fb63594397bf43cf4186795a.jpg" },
-                  { icon: CheckCircle, label: "Projects Completed", value: "120+", bg: "https://i.pinimg.com/736x/5a/d5/b0/5ad5b0c4c856fb6ec23b32669c073f55.jpg" },
-                  { icon: Calendar, label: "Events Hosted", value: "85", bg: "https://i.pinimg.com/1200x/d4/d4/ae/d4d4ae05805c59477bddb3351f23dc49.jpg" },
-                  { icon: Link2, label: "Active Partners", value: "24", bg: "https://i.pinimg.com/1200x/f1/6f/05/f16f05ae4d46ec681e62c208057abffc.jpg" }
+                  { icon: Users, label: "Youth Empowered", value: "150+", bg: "https://i.pinimg.com/736x/ab/62/de/ab62ded6fb63594397bf43cf4186795a.jpg" },
+                  { icon: CheckCircle, label: "Projects Completed", value: "50+", bg: "https://i.pinimg.com/736x/5a/d5/b0/5ad5b0c4c856fb6ec23b32669c073f55.jpg" },
+                  { icon: Calendar, label: "Events Hosted", value: "35+", bg: "https://i.pinimg.com/1200x/d4/d4/ae/d4d4ae05805c59477bddb3351f23dc49.jpg" },
+                  { icon: Link2, label: "Active Partners", value: "10", bg: "https://i.pinimg.com/1200x/f1/6f/05/f16f05ae4d46ec681e62c208057abffc.jpg" }
                 ].map((stat, i) => (
                   <div key={i} className="stat-card flex flex-col items-start text-left relative overflow-hidden group border-none p-0 min-h-[140px]">
                     <img src={stat.bg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 transition-transform duration-700 group-hover:scale-110" referrerPolicy="no-referrer" />
